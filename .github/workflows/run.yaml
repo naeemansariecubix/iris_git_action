@@ -10,7 +10,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: iterative/setup-cml@v0.5.0  # Specify version
+    - uses: iterative/setup-cml@v1  # Use the latest available version
     - uses: actions/checkout@v3
     
     - name: Train model
@@ -18,7 +18,7 @@ jobs:
         REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
       run: |
         pip install -r requirements.txt
-        pip install cml==0.5.0  # Install latest stable version of CML
+        pip install --upgrade cml  # Install the latest version of CML
         python train_model.py
         
         echo "RF and LR Model score" > report.md
@@ -30,6 +30,8 @@ jobs:
 
         cat report.md report1.md > combined_file.md
 
-        # Disable telemetry and try CML again
+        # Disable telemetry to avoid the undefined object issue
         export CML_TELEMETRY_DISABLED=true
-        # cml comment create combined_file.md
+        
+        # Create the comment with CML
+        cml comment create combined_file.md
