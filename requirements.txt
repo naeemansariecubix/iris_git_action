@@ -3,4 +3,3 @@ pandas
 scikit-learn
 matplotlib
 seaborn
-cloud-ml-common==0.0.2
