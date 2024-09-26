@@ -18,7 +18,7 @@ jobs:
         REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
       run: |
         pip install -r requirements.txt
-        pip install --upgrade cml  # Install the latest version of CML
+        pip install cml  # Install CML separately
         python train_model.py
         
         echo "RF and LR Model score" > report.md
@@ -30,8 +30,6 @@ jobs:
 
         cat report.md report1.md > combined_file.md
 
-        # Disable telemetry to avoid the undefined object issue
+        # Disable telemetry for CML
         export CML_TELEMETRY_DISABLED=true
-        
-        # Create the comment with CML
         cml comment create combined_file.md
