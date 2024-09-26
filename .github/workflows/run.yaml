@@ -15,7 +15,7 @@ jobs:
     
     - name: Train model
       env:
-        REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the default GitHub token
       run: |
         pip install -r requirements.txt
         python train_model.py
@@ -27,7 +27,6 @@ jobs:
         echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
         echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
 
-        # Check if report1.md exists
         if [ ! -f report1.md ]; then
             echo "report1.md does not exist."
             exit 1
