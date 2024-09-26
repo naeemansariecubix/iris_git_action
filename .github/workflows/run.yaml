@@ -1,0 +1,31 @@
+name: model_train
+permissions:
+  id-token: write
+  contents: write
+
+on:
+  push
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: iterative/setup-cml@v1
+    - uses: actions/checkout@v3
+    
+    - name: Train model
+      env:
+        REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
+      run: |
+        pip install -r requirements.txt
+        python train_model.py
+        
+        echo "RF and LR Model score" > report.md
+        cat report.txt >> report.md
+        
+        echo "Confusion Matrix & Feature Importance" > report1.md
+        echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
+        echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
+
+        cat report.md reportl.md > combined_file.md
+        cml coment create combined file.md
