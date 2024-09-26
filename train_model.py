@@ -103,7 +103,7 @@ labels = dataset.columns[:-1]  # Exclude 'target' from feature names
 feature_df = pd.DataFrame(list(zip(labels, importances)), columns=['feature', 'importance'])
 features = feature_df.sort_values(by='importance', ascending=False)
 
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(14, 8))
 ax = sns.barplot(x='importance', y='feature', data=features)
 ax.set_xlabel('Importance', fontsize=14)
 ax.set_ylabel('Feature', fontsize=14)
