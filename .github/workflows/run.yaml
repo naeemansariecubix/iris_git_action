@@ -10,15 +10,25 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: iterative/setup-cml@v1  # Use the latest available version
     - uses: actions/checkout@v3
     
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Install CML manually
+      run: |
+        pip install iterative-cml  # Install CML separately
+
     - name: Train model
       env:
         REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
       run: |
-        pip install -r requirements.txt
-        pip install cml  # Install CML separately
         python train_model.py
         
         echo "RF and LR Model score" > report.md
