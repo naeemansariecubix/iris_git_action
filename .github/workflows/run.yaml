@@ -21,17 +21,11 @@ jobs:
         python train_model.py
         
         echo "RF and LR Model score" > report.md
-        
-        # Check if report.txt exists
-        if [ -f report.txt ]; then
-          cat report.txt >> report.md
-        else
-          echo "Report not found, skipping..." >> report.md
-        fi
+        cat report.txt >> report.md
         
         echo "Confusion Matrix & Feature Importance" > report1.md
         echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
         echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
 
-        cat report.md report1.md > combined_file.md
-        cml comment create combined_file.md
+        cat report.md reportl.md > combined_file.md
+        cml coment create combined file.md
