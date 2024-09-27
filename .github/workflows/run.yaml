@@ -23,7 +23,7 @@ jobs:
         python train_model.py
         
         echo "RF and LR Model score" > report.md
-        cat report.txt >> report.md
+        cat scores.txt >> report.md
         
         echo "Confusion Matrix & Feature Importance" > report1.md
         echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
