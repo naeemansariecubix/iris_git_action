@@ -15,7 +15,7 @@ jobs:
     
     - name: Train model
       env:
-        REPO_TOKEN: ${{ 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 }}
+        REPO_TOKEN: ${{ secrets.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 }}
       run: |
         pip install -r requirements.txt
         python train_model.py
