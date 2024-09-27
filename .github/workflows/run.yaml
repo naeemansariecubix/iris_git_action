@@ -27,5 +27,6 @@ jobs:
         echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
         echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
 
-        cat report.md reportl.md > combined_file.md
-        cml coment create combined file.md
+        # Fixed typo: use 'report1.md' instead of 'reportl.md'
+        cat report.md report1.md > combined_file.md
+        cml comment create combined_file.md
