@@ -12,6 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: iterative/setup-cml@v2
+        with:
+         version: 'v0.18.1'
 
       # Setting up Node.js (you may want to ensure this is version 20, since older versions are deprecated)
       - uses: actions/setup-node@v3
