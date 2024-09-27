@@ -9,24 +9,43 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    steps:
-    - uses: iterative/setup-cml@v1
-    - uses: actions/checkout@v3
-    
-    - name: Train model
-      env:
-        REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}
-      run: |
-        pip install -r requirements.txt
-        python train_model.py
-        
-        echo "RF and LR Model score" > report.md
-        cat report.txt >> report.md
-        
-        echo "Confusion Matrix & Feature Importance" > report1.md
-        echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
-        echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
 
-        # Fixed typo: use 'report1.md' instead of 'reportl.md'
-        cat report.md report1.md > combined_file.md
-        cml comment create combined_file.md
+    steps:
+      - uses: actions/checkout@v3
+
+      # Setting up Node.js (you may want to ensure this is version 20, since older versions are deprecated)
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Set up CML
+      - uses: iterative/setup-cml@v1
+
+      # Python setup
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Train model
+        env:
+          REPO_TOKEN: ${{ secrets.G1nwg_TOKEN }}  # Replace with your actual GitHub secret token name
+        run: |
+          # Install dependencies
+          pip install -r requirements.txt
+          
+          # Run the training script
+          python train_model.py
+          
+          # Combine report and output results
+          echo "RF and LR Model score" > report.md
+          cat report.txt >> report.md
+          
+          echo "Confusion Matrix & Feature Importance" > report1.md
+          echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
+          echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
+
+          # Combine the two reports into one file
+          cat report.md report1.md > combined_file.md
+          
+          # Use CML to post the combined report to the repository's comments
+          cml comment create combined_file.md
