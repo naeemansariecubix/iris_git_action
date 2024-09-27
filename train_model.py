@@ -110,7 +110,7 @@ plt.savefig('FeatureImportance.png')
 plt.close()
 
 # Save Scores to a Text File
-with open('scores.txt', "w") as score:
+with open('report.txt', "w") as score:
     score.write(f"Random Forest Train Var: {train_acc_rf:.1f}%\n")
     score.write(f"Random Forest Test Var: {test_acc_rf:.1f}%\n")
     score.write(f"F1 Score: {f1_rf:.1f}%\n")
