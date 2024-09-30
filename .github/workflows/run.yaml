@@ -39,16 +39,4 @@ jobs:
           # Run the training script
           python train_model.py
           
-          # Combine report and output results
-          echo "RF and LR Model score" > report.md
-          cat report.txt >> report.md
-          
-          echo "Confusion Matrix & Feature Importance" > report1.md
-          echo "![Confusion Matrix](./ConfusionMatrix.png)" >> report1.md
-          echo "![Feature Importance](./FeatureImportance.png)" >> report1.md
 
-          # Combine the two reports into one file
-          cat report.md report1.md > combined_file.md
-          
-          # Use CML to post the combined report to the repository's comments
-          cml comment create combined_file.md
