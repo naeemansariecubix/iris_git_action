@@ -30,3 +30,4 @@ jobs:
       - name: Train model
         run: |
           python train_model.py
+          
